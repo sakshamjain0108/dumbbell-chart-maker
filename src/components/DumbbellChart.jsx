@@ -119,7 +119,7 @@ const DumbbellChart = ({ title, rows, isDarkMode, colorGainsLosses, showValues }
               cx={xFrom} 
               cy={yCenter} 
               r="8" 
-              fill={isDarkMode ? '#111827' : '#ffffff'} 
+              fill={(!row.fromSymbol || row.fromSymbol === 'hollow') ? (isDarkMode ? '#111827' : '#ffffff') : color} 
               stroke={color} 
               strokeWidth="4" 
             />
@@ -130,7 +130,9 @@ const DumbbellChart = ({ title, rows, isDarkMode, colorGainsLosses, showValues }
                 cx={xTo} 
                 cy={yCenter} 
                 r="8" 
-                fill={color} 
+                fill={(row.toSymbol === 'hollow') ? (isDarkMode ? '#111827' : '#ffffff') : color} 
+                stroke={color} 
+                strokeWidth="4" 
               />
             )}
 

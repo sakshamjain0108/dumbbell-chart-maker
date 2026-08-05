@@ -6,9 +6,9 @@ import DumbbellChart from './components/DumbbellChart';
 function App() {
   const [title, setTitle] = useState('Total fertility rate (children per woman)');
   const [rows, setRows] = useState([
-    { id: '1', label: 'NFHS-4', from: 2.2, to: 2.3, fromLabel: 'India', toLabel: 'MP' },
-    { id: '2', label: 'NFHS-5', from: 2.0, to: 2.0, fromLabel: 'India / MP', toLabel: '' },
-    { id: '3', label: 'NFHS-6', from: 2.0, to: 2.1, fromLabel: 'India', toLabel: 'MP' },
+    { id: '1', label: 'NFHS-4', from: 2.2, to: 2.3, fromLabel: 'India', toLabel: 'MP', fromSymbol: 'hollow', toSymbol: 'solid' },
+    { id: '2', label: 'NFHS-5', from: 2.0, to: 2.0, fromLabel: 'India / MP', toLabel: '', fromSymbol: 'solid', toSymbol: 'solid' },
+    { id: '3', label: 'NFHS-6', from: 2.0, to: 2.1, fromLabel: 'India', toLabel: 'MP', fromSymbol: 'hollow', toSymbol: 'solid' },
   ]);
   
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -17,7 +17,7 @@ function App() {
 
   const addRow = () => {
     const newId = Date.now().toString();
-    setRows([...rows, { id: newId, label: 'New Row', from: 0, to: 0, fromLabel: '', toLabel: '' }]);
+    setRows([...rows, { id: newId, label: 'New Row', from: 0, to: 0, fromLabel: '', toLabel: '', fromSymbol: 'hollow', toSymbol: 'solid' }]);
   };
 
   const removeRow = (id) => {
@@ -157,6 +157,30 @@ function App() {
                         onChange={(e) => updateRow(row.id, 'toLabel', e.target.value)}
                         className={`w-full p-1.5 border rounded text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
                       />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 mt-2">
+                    <div>
+                      <label className="text-xs text-gray-500 mb-1 block">From Symbol</label>
+                      <select 
+                        value={row.fromSymbol || 'hollow'}
+                        onChange={(e) => updateRow(row.id, 'fromSymbol', e.target.value)}
+                        className={`w-full p-1.5 border rounded text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      >
+                        <option value="hollow">Hollow Circle</option>
+                        <option value="solid">Solid Circle</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-1 block">To Symbol</label>
+                      <select 
+                        value={row.toSymbol || 'solid'}
+                        onChange={(e) => updateRow(row.id, 'toSymbol', e.target.value)}
+                        className={`w-full p-1.5 border rounded text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      >
+                        <option value="hollow">Hollow Circle</option>
+                        <option value="solid">Solid Circle</option>
+                      </select>
                     </div>
                   </div>
                 </div>
